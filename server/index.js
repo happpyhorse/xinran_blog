@@ -1,23 +1,29 @@
 // common js modules
-const express = require('express');
-const moogoose = require('mongoose');
-const keys = require('./config/keys');
-
-
+const express = require("express");
+const moogoose = require("mongoose");
+const keys = require("./config/keys");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
 
 moogoose.connect(keys.mongoURI);
 
-require('./models/User');
+require("./models/User");
 
 const app = express();
-require('./routes/authRoutes')(app);
+app.use(
+  cookieSession({ maxAge: 20 * 24 * 60 * 60 * 1000, keys: [keys.cookieKey] })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/', (req, res) => {
-    res.send();
+require("./routes/authRoutes")(app);
+
+app.get("/", (req, res) => {
+  res.send();
 });
 
-require('./services/passport');
+require("./services/passport");
 
 // injected by heroku
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 5050;
 app.listen(PORT);
