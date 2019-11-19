@@ -25,5 +25,5 @@ app.get("/", (req, res) => {
 require("./services/passport");
 
 // injected by heroku
-const PORT = process.env.PORT || 5050;
+const PORT =  process.env.PORT || 3000;
 app.listen(PORT);
