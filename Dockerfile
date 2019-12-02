@@ -1,22 +1,28 @@
 FROM node:13.1.0
 
-WORKDIR /usr/src/app/server
+ENV COOKIE_KEY AS;FJKLAKWEJF()FDWAFE
 
-COPY server/package*.json ./
+ENV NODE_ENV production
 
-RUN npm install && npm install mongoose -g 
+ENV GOOGLE_CLIENT_ID 120570750996-blrmfol2bd5k8af2nmumohv7uvhgkggu.apps.googleusercontent.com
 
-WORKDIR /usr/src/app/server/client
+ENV GOOGLE_CLIENT_SECRET Y_n1UXqJwBK4BgFiTatILg7r
 
-COPY server/client/package*.json ./
-
-RUN npm install
+ENV MONGO_URI mongodb+srv://marissa:223WzMQDUqNyZbCZ@cluster0-p1220.mongodb.net/test?retryWrites=true&w=majority
 
 WORKDIR /usr/src/app
 
+COPY server/package*.json ./server/
+
+RUN npm install --prefix server && npm install mongoose -g 
+
+COPY server/client/package*.json ./server/client/
+
+RUN npm install --prefix server/client
+
 COPY . .
 
-EXPOSE 3000
+RUN npm run build --prefix server/client
 
 WORKDIR /usr/src/app/server
 
