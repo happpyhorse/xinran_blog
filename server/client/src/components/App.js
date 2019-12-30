@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Header from './Header';
+import PostCreate from './posts/PostCreate';
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -22,6 +23,7 @@ class App extends Component {
                         <Header />
                         <Route exact path="/" component={Landing} />
                         <Route path="/Landing" component={Dashboard} />
+                        <Route path="/posts/new" component={PostCreate} />
                     </div>
                 </BrowserRouter>
             </div>
