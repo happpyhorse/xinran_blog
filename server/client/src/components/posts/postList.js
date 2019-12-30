@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 import { fetchPosts } from '../../actions';
 
 class PostList extends React.Component {
@@ -13,8 +13,8 @@ class PostList extends React.Component {
 		if (post.userId === this.props.currentUserId) {
 			return (
 				<div>
-					<button>Edit</button>
-					<button>Delete</button>
+					<Link to={`/posts/edit/${post.id}`}>Edit</Link>
+					<Link>Delete</Link>
 				</div>
 			);
 		}
