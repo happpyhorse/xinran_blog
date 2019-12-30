@@ -9,6 +9,17 @@ class PostList extends React.Component {
 		this.props.fetchPosts();
 	}
 
+	renderAdmin(post) {
+		if (post.userId === this.props.currentUserId) {
+			return (
+				<div>
+					<button>Edit</button>
+					<button>Delete</button>
+				</div>
+			);
+		}
+	}
+
 	renderList() {
 		return this.props.posts.map(post => {
 			return (
@@ -19,9 +30,22 @@ class PostList extends React.Component {
 					<div>
 						{post.content}
 					</div>
+					{this.renderAdmin(post)}
 				</div>
 			);
 		})
+	}
+
+	renderCreate() {
+		if (this.props.isSignedIn) {
+			return (
+				<div>
+					<Link to="/posts/new">
+						Create post
+					</Link>
+				</div>
+			);
+		}
 	}
 
 	render() {
@@ -31,13 +55,14 @@ class PostList extends React.Component {
 				<div>
 					{this.renderList()}
 				</div>
+				{this.renderCreate()}
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = (state) => {
-	return { posts: Object.values(state.posts) };
+	return { posts: Object.values(state.posts), currentUserId: state.auth.userId, isSignedIn: state.auth.loggedIn };
 };
 
 export default connect(mapStateToProps, { fetchPosts })(PostList); 

@@ -19,8 +19,9 @@ export const fetchUser = () =>
     }
 
 export const createPost = formValues =>
-    async dispatch => {
-        const res = await posts.post('/', formValues);
+    async (dispatch, getState) => {
+        const { userId } = getState().auth;
+        const res = await posts.post('/', { ...formValues, userId });
         dispatch({ type: CREATE_POST, payload: res.data });
 
     }
