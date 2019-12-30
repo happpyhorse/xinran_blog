@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import * as actions from '../actions';
+//handle history object ourselves
+import history from '../history';
 
 import Header from './Header';
 import PostCreate from './posts/PostCreate';
@@ -18,7 +21,8 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <BrowserRouter>
+                {/* create a plain router instead of BrowserRouter, since we want to have access to history object in action creator */}
+                <Router history={history}>
                     <div>
                         <Header />
                         <Route exact path="/" component={Landing} />

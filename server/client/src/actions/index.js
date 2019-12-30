@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import history from '../history';
+
 import {
     FETCH_USER,
     CREATE_POST,
@@ -22,7 +24,9 @@ export const createPost = formValues =>
     async (dispatch, getState) => {
         const { userId } = getState().auth;
         const res = await posts.post('/', { ...formValues, userId });
+
         dispatch({ type: CREATE_POST, payload: res.data });
+        history.push('/');
 
     }
 
