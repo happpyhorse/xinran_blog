@@ -9,6 +9,7 @@ import history from '../history';
 import Header from './Header';
 import PostCreate from './posts/PostCreate';
 import PostEdit from './posts/PostEdit';
+import PostDelete from './posts/PostDelete';
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -30,8 +31,8 @@ class App extends Component {
                         <Route path="/Landing" component={Dashboard} />
                         <Route path="/posts/new" exact component={PostCreate} />
                         <Route path="/posts/edit/:id" exact component={PostEdit} />
-                        {/* <Route path="/posts/delete/:id" exact component={PostDelete} />
-                        <Route path="/posts/show/:id" exact component={PostShow} /> */}
+                        <Route path="/posts/delete/:id" exact component={PostDelete} />
+                        <Route path="/posts/show/:id" exact component={PostShow} />
                     </div>
                 </Router>
             </div>

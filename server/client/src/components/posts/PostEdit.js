@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
@@ -7,11 +8,11 @@ import PostForm from './PostForm';
 
 class PostEdit extends Component {
 	componentDidMount() {
-		this.props.fetchPost(this.props.match.params.id)
+		this.props.fetchPost(this.props.match.params.id);
 	}
 
 	onSubmit = (formValues) => {
-		this.props.editPost(formValues);
+		this.props.editPost(this.props.match.params.id, formValues);
 	}
 
 	render() {
@@ -22,7 +23,7 @@ class PostEdit extends Component {
 			<div>
 				<h3>Edit a Post</h3>
 				{/* react form will find property inside intialValues to set intial values */}
-				<PostForm initialValues={this.props.post} onSubmit={this.onSubmit}></PostForm>
+				<PostForm initialValues={_.pick(this.props.post, "title", "content")} onSubmit={this.onSubmit}></PostForm>
 			</div>
 		)
 	}
