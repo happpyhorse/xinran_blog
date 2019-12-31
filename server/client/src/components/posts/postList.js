@@ -14,7 +14,7 @@ class PostList extends React.Component {
 			return (
 				<div>
 					<Link to={`/posts/edit/${post.id}`}>Edit</Link>
-					<Link>Delete</Link>
+					<Link to={`/posts/delete/${post.id}`}>Delete</Link>
 				</div>
 			);
 		}
