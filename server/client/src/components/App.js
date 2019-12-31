@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
@@ -10,6 +10,7 @@ import Header from './Header';
 import PostCreate from './posts/PostCreate';
 import PostEdit from './posts/PostEdit';
 import PostDelete from './posts/PostDelete';
+import PostShow from './posts/PostShow';
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -17,7 +18,7 @@ const Landing = () => <h2>Landing</h2>;
 
 class App extends Component {
     componentDidMount() {
-        this.props.fetchUser(); 
+        this.props.fetchUser();
     }
 
     render() {
@@ -27,12 +28,15 @@ class App extends Component {
                 <Router history={history}>
                     <div>
                         <Header />
-                        <Route exact path="/" component={Landing} />
-                        <Route path="/Landing" component={Dashboard} />
-                        <Route path="/posts/new" exact component={PostCreate} />
-                        <Route path="/posts/edit/:id" exact component={PostEdit} />
-                        <Route path="/posts/delete/:id" exact component={PostDelete} />
-                        <Route path="/posts/show/:id" exact component={PostShow} />
+                        {/* show only one of these components */}
+                        <Switch>
+                            <Route exact path="/" exact component={Landing} />
+                            <Route path="/Landing" exact component={Dashboard} />
+                            <Route path="/posts/new" exact component={PostCreate} />
+                            <Route path="/posts/edit/:id" exact component={PostEdit} />
+                            <Route path="/posts/delete/:id" exact component={PostDelete} />
+                            <Route path="/posts/:id" exact component={PostShow} />
+                        </Switch>
                     </div>
                 </Router>
             </div>

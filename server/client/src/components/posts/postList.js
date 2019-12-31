@@ -25,7 +25,9 @@ class PostList extends React.Component {
 			return (
 				<div key={post.id}>
 					<div>
-						{post.title}
+						<Link to={`/posts/${post.id}`}>
+							{post.title}
+						</Link>						
 					</div>
 					<div>
 						{post.content}
