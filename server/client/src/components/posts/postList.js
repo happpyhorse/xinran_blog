@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPosts } from '../../actions';
@@ -13,8 +14,8 @@ class PostList extends React.Component {
 		if (post.userId === this.props.currentUserId) {
 			return (
 				<div>
-					<Link to={`/posts/edit/${post.id}`}>Edit</Link>
-					<Link to={`/posts/delete/${post.id}`}>Delete</Link>
+					<Link to={`/posts/edit/${post._id}`}>Edit</Link>
+					<Link to={`/posts/delete/${post._id}`}>Delete</Link>
 				</div>
 			);
 		}
@@ -23,14 +24,14 @@ class PostList extends React.Component {
 	renderList() {
 		return this.props.posts.map(post => {
 			return (
-				<div key={post.id}>
+				<div key={post._id}>
 					<div>
-						<Link to={`/posts/${post.id}`}>
+						<Link to={`/posts/${post._id}`}>
 							{post.title}
 						</Link>						
 					</div>
 					<div>
-						{post.content}
+						<ReactMarkdown source={post.content} />
 					</div>
 					{this.renderAdmin(post)}
 				</div>
@@ -64,7 +65,7 @@ class PostList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	return { posts: Object.values(state.posts), currentUserId: state.auth.userId, isSignedIn: state.auth.loggedIn };
+	return { posts: Object.values(state.posts), currentUserId: state.auth && state.auth.userId };
 };
 
 export default connect(mapStateToProps, { fetchPosts })(PostList); 

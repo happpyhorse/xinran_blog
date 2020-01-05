@@ -1,2 +1,5 @@
-node-modules
+node_modules
 npm-debug.log
+.history
+.git
+.vscode

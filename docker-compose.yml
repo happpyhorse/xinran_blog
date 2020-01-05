@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   app:
-    container_name: docker-image-mongo
+    container_name: react-node
     restart: always
     build: 
       context: .
@@ -12,7 +12,7 @@ services:
     links:
       - mongo
     volumes:
-      - /Users/maxinran/Documents/ACADEMIC/Programming/xinran_blog:/usr/src/app
+      - /Users/maxinran/Documents/Programming/xinran_blog:/usr/src/app
       - /usr/src/app/server/node_modules
       - /usr/src/app/server/client/node_modules
   mongo:

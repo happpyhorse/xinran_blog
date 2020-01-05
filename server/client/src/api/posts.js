@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-	baseURL: '/posts'
+	baseURL: '/api/posts'
 })

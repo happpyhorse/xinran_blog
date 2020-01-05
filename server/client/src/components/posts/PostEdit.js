@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { fetchPost, editPost } from './../../actions/index';
+import { fetchPost, editPost } from './../../actions';
 import PostForm from './PostForm';
 
 class PostEdit extends Component {
@@ -33,4 +33,4 @@ const mapStateToProps = (state, ownProps) => {
 	return { post: state.posts[ownProps.match.params.id] }
 }
 
-export default connect(mapStateToProps, (fetchPost, editPost))(PostEdit);
+export default connect(mapStateToProps, {fetchPost, editPost})(PostEdit);

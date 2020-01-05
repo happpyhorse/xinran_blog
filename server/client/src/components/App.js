@@ -11,6 +11,7 @@ import PostCreate from './posts/PostCreate';
 import PostEdit from './posts/PostEdit';
 import PostDelete from './posts/PostDelete';
 import PostShow from './posts/PostShow';
+import PostList from './posts/PostList';
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -30,8 +31,9 @@ class App extends Component {
                         <Header />
                         {/* show only one of these components */}
                         <Switch>
-                            <Route exact path="/" exact component={Landing} />
+                            <Route path="/" exact component={Landing} />
                             <Route path="/Landing" exact component={Dashboard} />
+                            <Route path="/posts" exact component={PostList} />
                             <Route path="/posts/new" exact component={PostCreate} />
                             <Route path="/posts/edit/:id" exact component={PostEdit} />
                             <Route path="/posts/delete/:id" exact component={PostDelete} />

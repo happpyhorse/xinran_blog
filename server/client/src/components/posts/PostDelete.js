@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import history from '../../history';
-import { fetchPost, deletePost } from './../actions'
+import { fetchPost, deletePost } from './../../actions'
 
 
 class PostDelete extends Component {
