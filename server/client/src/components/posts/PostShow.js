@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 
 import { fetchPost } from './../../actions'
 
@@ -20,10 +21,10 @@ class PostShow extends Component {
 		const { title, content } = this.props.post;
 
 		return (
-			<div>
+			<div id="post-show">
 				<h1>{title}</h1>
 				<div className="content">
-					{content}
+					<ReactMarkdown source={content} />
 				</div>
 			</div>
 		);
@@ -32,7 +33,7 @@ class PostShow extends Component {
 }
 
 const mapStateFromProps = (state, ownProps) => {
-	return { post: state.posts[ownProps.props.match.params.id] }
+	return { post: state.posts[ownProps.match.params.id] }
 }
 
 export default connect(mapStateFromProps, { fetchPost })(PostShow)

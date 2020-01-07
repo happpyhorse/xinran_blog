@@ -12,10 +12,10 @@ class PostCreate extends Component {
 
 	render() {
 		return (
-			<>
-				<h3>Create a Post</h3>
+			<div id="post-create">
+				<h1>Create a Post</h1>
 				<PostForm onSubmit={this.onSubmit}></PostForm>
-			</>
+			</div>
 
 		);
 	}

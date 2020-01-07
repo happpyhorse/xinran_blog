@@ -2,9 +2,28 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class Header extends Component {
+class Menu extends Component {
+
 
     renderContent() {
+        const { auth } = this.props;
+        return (
+            <>
+                <li key="posts">
+                    <Link to="/posts/">Posts</Link>
+                </li>
+                {auth &&
+                    <li key="create">
+                        <Link to="/posts/new">Create</Link>
+                    </li>}
+                {this.renderAuthLink()}
+            </>
+        );
+
+
+    }
+
+    renderAuthLink() {
         const { auth } = this.props;
         switch (auth) {
             case null:
@@ -23,13 +42,13 @@ class Header extends Component {
     }
     render() {
         return (
+
             <nav>
-                <div className="nav-wrapper">
-                    <Link to='/' className="left brand-logo">Xinran</Link>
-                    <ul className="right">
-                        { this.renderContent() }
-                    </ul>
-                </div>
+                <Link id="nav-title" to="/posts/">Xinran</Link>
+                <ul id="nav-menu">
+                    {this.renderContent()}
+                </ul>
+
             </nav>
         );
     }
@@ -39,4 +58,4 @@ function mapStateToProps({ auth }) {
     return { auth };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(Menu);

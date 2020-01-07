@@ -14,8 +14,8 @@ class PostList extends React.Component {
 		if (post.userId === this.props.currentUserId) {
 			return (
 				<div>
-					<Link to={`/posts/edit/${post._id}`}>Edit</Link>
-					<Link to={`/posts/delete/${post._id}`}>Delete</Link>
+					<Link className="xr-button" to={`/posts/edit/${post._id}`}>Edit</Link>
+					<Link className="xr-button white" to={`/posts/delete/${post._id}`}>Delete</Link>
 				</div>
 			);
 		}
@@ -24,13 +24,13 @@ class PostList extends React.Component {
 	renderList() {
 		return this.props.posts.map(post => {
 			return (
-				<div key={post._id}>
-					<div>
+				<div key={post._id} className="post-list-post">
+					<h1 className="post-title">
 						<Link to={`/posts/${post._id}`}>
 							{post.title}
 						</Link>						
-					</div>
-					<div>
+					</h1>
+					<div className="post-content">
 						<ReactMarkdown source={post.content} />
 					</div>
 					{this.renderAdmin(post)}
@@ -39,26 +39,13 @@ class PostList extends React.Component {
 		})
 	}
 
-	renderCreate() {
-		if (this.props.isSignedIn) {
-			return (
-				<div>
-					<Link to="/posts/new">
-						Create post
-					</Link>
-				</div>
-			);
-		}
-	}
-
 	render() {
 		return (
-			<div>
-				<h2>Posts</h2>
+			<div id="post-list">
+				<h1>Posts</h1>
 				<div>
 					{this.renderList()}
 				</div>
-				{this.renderCreate()}
 			</div>
 		);
 	}
