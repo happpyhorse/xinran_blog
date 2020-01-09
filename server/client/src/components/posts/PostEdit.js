@@ -21,9 +21,9 @@ class PostEdit extends Component {
 		}
 		return (
 			<div id="post-edit">
-				<h4>Edit a Post</h4>
+				<h1>Edit a Post</h1>
 				{/* react form will find property inside intialValues to set intial values */}
-				<PostForm initialValues={_.pick(this.props.post, "title", "content")} onSubmit={this.onSubmit}></PostForm>
+				<PostForm initialValues={_.pick(this.props.post, "title", "content", "category")} onSubmit={this.onSubmit}></PostForm>
 			</div>
 		)
 	}

@@ -13,7 +13,7 @@ class PostList extends React.Component {
 	renderAdmin(post) {
 		if (post.userId === this.props.currentUserId) {
 			return (
-				<div>
+				<div className="post-actions">
 					<Link className="xr-button" to={`/posts/edit/${post._id}`}>Edit</Link>
 					<Link className="xr-button white" to={`/posts/delete/${post._id}`}>Delete</Link>
 				</div>

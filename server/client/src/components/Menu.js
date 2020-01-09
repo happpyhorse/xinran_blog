@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Menu extends Component {
@@ -10,11 +10,11 @@ class Menu extends Component {
         return (
             <>
                 <li key="posts">
-                    <Link to="/posts/">Posts</Link>
+                    <NavLink to="/posts/" activeClassName="selected" exact>Posts</NavLink>
                 </li>
                 {auth &&
                     <li key="create">
-                        <Link to="/posts/new">Create</Link>
+                        <NavLink to="/posts/new" activeClassName="selected" exact>Create</NavLink>
                     </li>}
                 {this.renderAuthLink()}
             </>
@@ -44,7 +44,7 @@ class Menu extends Component {
         return (
 
             <nav>
-                <Link id="nav-title" to="/posts/">Xinran</Link>
+                <NavLink id="nav-title" to="/posts/" exact>Xinran</NavLink>
                 <ul id="nav-menu">
                     {this.renderContent()}
                 </ul>

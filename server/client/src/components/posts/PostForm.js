@@ -23,10 +23,20 @@ class PostForm extends Component {
 
 	renderInput = ({ input, label, meta }) => {
 		return (
-			<div>
-				<label>{label}</label>
-				<input {...input} />
+			<div id={`post-form-${input.name}`}>
+				<input {...input} placeholder={label}/>
 				{this.renderError(meta)}
+			</div>
+		);
+	}
+
+	renderCategoryDropdown = ({input}) => {
+		return (
+			<div id={`post-form-${input.name}`}>
+				<select {...input}>
+					<option value="">Select a Category</option>
+					<option value="Coding">Coding</option>
+				</select>
 			</div>
 		);
 	}
@@ -35,7 +45,7 @@ class PostForm extends Component {
 		return (
 			<div style={{ height: "500px" }}>
 				<MdEditor
-					renderHTML={(text) => { console.log(text); return this.mdParser.render(text); }}
+					renderHTML={(text) => { return this.mdParser.render(text); }}
 					onChange={({ html, text }) => input.onChange(text)}
 					value={input.value}
 				/>
@@ -43,12 +53,15 @@ class PostForm extends Component {
 		);
 	}
 
+	
+
 	render() {
 		return (
 			<form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-				<Field name="title" component={this.renderInput} label="Title" />
+				<Field name="title" component={this.renderInput} label="Title" />	
+				<Field name="category" component={this.renderCategoryDropdown} />
 				<Field name="content" component={this.renderContentEditor} />
-				<button>Submit</button>
+				<button id="post-form-submit">Submit</button>
 			</form>
 
 		);

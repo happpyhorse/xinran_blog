@@ -15,10 +15,11 @@ module.exports = app => {
 	});
 
 	app.post("/api/posts", requireLogin, async (req, res) => {
-		const { title, content } = req.body;
+		const { title, content, category } = req.body;
 		let post = new Post({
 			title,
 			content,
+			category,
 			_user: req.user.id
 		});
 
@@ -31,7 +32,7 @@ module.exports = app => {
 	});
 
 	app.patch("/api/posts/:postId", requireLogin, async (req, res) => {
-		const { title, content } = req.body;
+		const { title, content, category } = req.body;
 		const id = req.params.postId
 		const post = await Post.findById(id);
 		if( !post ){
@@ -41,7 +42,7 @@ module.exports = app => {
 		if( post._user != req.user.id ){
 			return res.status(401).send({ error: 'You are not allowed to edit this post!' });
 		}
-		const newPost = await Post.findByIdAndUpdate(id, {title, content});
+		const newPost = await Post.findByIdAndUpdate(id, {title, content, category});
 		res.send(newPost);
 		
 	});
